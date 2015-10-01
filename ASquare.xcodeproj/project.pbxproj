@@ -13,6 +13,7 @@
 		CFE364871BBC4343004B782B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CFE364851BBC4343004B782B /* Main.storyboard */; };
 		CFE364891BBC4343004B782B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFE364881BBC4343004B782B /* Assets.xcassets */; };
 		CFE3648C1BBC4343004B782B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CFE3648A1BBC4343004B782B /* LaunchScreen.storyboard */; };
+		CFE364951BBC7842004B782B /* LocationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE364941BBC7842004B782B /* LocationHelper.m */; settings = {ASSET_TAGS = (); }; };
 		E13FDF9A75BCCF52A1842319 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D9184F4169B12E04B91F98B /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +31,8 @@
 		CFE364881BBC4343004B782B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CFE3648B1BBC4343004B782B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CFE3648D1BBC4343004B782B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CFE364931BBC7842004B782B /* LocationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationHelper.h; sourceTree = "<group>"; };
+		CFE364941BBC7842004B782B /* LocationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationHelper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,13 +87,15 @@
 			children = (
 				CFE3647F1BBC4343004B782B /* AppDelegate.h */,
 				CFE364801BBC4343004B782B /* AppDelegate.m */,
+				CFE364881BBC4343004B782B /* Assets.xcassets */,
+				CFE3648D1BBC4343004B782B /* Info.plist */,
+				CFE3648A1BBC4343004B782B /* LaunchScreen.storyboard */,
+				CFE364931BBC7842004B782B /* LocationHelper.h */,
+				CFE364941BBC7842004B782B /* LocationHelper.m */,
+				CFE364851BBC4343004B782B /* Main.storyboard */,
+				CFE3647C1BBC4343004B782B /* Supporting Files */,
 				CFE364821BBC4343004B782B /* ViewController.h */,
 				CFE364831BBC4343004B782B /* ViewController.m */,
-				CFE364851BBC4343004B782B /* Main.storyboard */,
-				CFE364881BBC4343004B782B /* Assets.xcassets */,
-				CFE3648A1BBC4343004B782B /* LaunchScreen.storyboard */,
-				CFE3648D1BBC4343004B782B /* Info.plist */,
-				CFE3647C1BBC4343004B782B /* Supporting Files */,
 			);
 			path = ASquare;
 			sourceTree = "<group>";
@@ -208,6 +213,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFE364951BBC7842004B782B /* LocationHelper.m in Sources */,
 				CFE364841BBC4343004B782B /* ViewController.m in Sources */,
 				CFE364811BBC4343004B782B /* AppDelegate.m in Sources */,
 				CFE3647E1BBC4343004B782B /* main.m in Sources */,
