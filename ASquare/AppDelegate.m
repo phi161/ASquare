@@ -6,6 +6,7 @@
 //  Copyright © 2015 Carmine Studios. All rights reserved.
 //
 
+@import GoogleMaps;
 #import "AppDelegate.h"
 
 @interface AppDelegate ()
@@ -17,7 +18,12 @@
 
 -(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    // This is just to avoid pushing sensitive key information on Github
+    NSDictionary *keys = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"APIKeys" ofType:@"plist"]];
+    NSString *googleAPIKey = keys[@"GoogleAPIKey"];
+
+    [GMSServices provideAPIKey:googleAPIKey];
+
     return YES;
 }
 
