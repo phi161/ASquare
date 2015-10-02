@@ -13,11 +13,15 @@
 @interface ViewController ()
 
 @property (nonatomic, strong) IBOutlet GMSMapView *map;
+@property (nonatomic, strong) IBOutlet UILabel *statusLabel;
+@property (nonatomic, strong) IBOutlet UILabel *addressLabel;
+@property (nonatomic, strong) IBOutlet NSLayoutConstraint *bottomConstraint;
 @property (nonatomic, strong) GMSMarker *myLocationMarker;
 @property (nonatomic, strong) LocationHelper *locationHelper;
 
 -(void)closeButtonTapped:(id)sender;
 -(void)homeButtonTapped:(id)sender;
+-(void)reset;
 
 @end
 
@@ -26,13 +30,19 @@
 
 #pragma mark - Setup
 
+-(void)dealloc
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+}
+
+
 -(instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
 
     if (self)
     {
-        _locationHelper = [[LocationHelper alloc] init];
+        //
     }
 
     return self;
@@ -43,6 +53,8 @@
 {
     [super viewDidLoad];
 
+    self.statusLabel.text = @"";
+    
     // Title View
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Logo"]];
 
@@ -56,8 +68,9 @@
 
     [self.navigationItem setRightBarButtonItem:closeButton];
 
-//    UIEdgeInsets mapInsets = UIEdgeInsetsMake(0.0, 0.0, 40.0, 0.0);
-//    self.map.padding = mapInsets;
+    // Do not hide the Google logo
+    UIEdgeInsets mapInsets = UIEdgeInsetsMake(0.0, 0.0, CGRectGetHeight(self.statusLabel.superview.bounds), 0.0);
+    self.map.padding = mapInsets;
 }
 
 
@@ -94,8 +107,26 @@
 
 -(void)homeButtonTapped:(id)sender
 {
-    [self.locationHelper
-     findMyLocationWithSucces: ^(CLLocation *myLocation, NSError *error) {
+    [self requestLocation];
+}
+
+
+-(void)closeButtonTapped:(id)sender
+{
+    [self reset];
+    [self requestLocation];
+}
+
+
+#pragma mark - Logic
+
+-(void)requestLocation
+{
+    self.statusLabel.text = NSLocalizedString(@"GETTING_LOCATION", @"");
+    
+    _locationHelper = [[LocationHelper alloc] init];
+    
+    [self.locationHelper findMyLocationWithSucces: ^(CLLocation *myLocation, NSError *error) {
         if (error)
         {
             [self handleLocationAuthorizationError];
@@ -108,22 +139,76 @@
             }
             else
             {
-                [self.map
-                 animateToLocation:myLocation.coordinate];
-                [self.map
-                 animateToZoom:16];
+                self.statusLabel.text = NSLocalizedString(@"CURRENT_LOCATION", @"");
 
+                [self.map animateToLocation:myLocation.coordinate];
+                [self.map animateToZoom:16];
+                
                 self.myLocationMarker = [GMSMarker markerWithPosition:myLocation.coordinate];
+                [self.myLocationMarker setIcon:[UIImage imageNamed:@"ico-mylocation-pin"]];
                 self.myLocationMarker.map = self.map;
+                
+                [self requestAddress];
             }
         }
     }];
 }
 
 
--(void)closeButtonTapped:(id)sender
+-(void)requestAddress
 {
-    //
+    self.statusLabel.text = NSLocalizedString(@"GETTING_ADDRESS", @"");
+
+    [[GMSGeocoder geocoder] reverseGeocodeCoordinate:self.myLocationMarker.position completionHandler:^(GMSReverseGeocodeResponse* response, NSError* error) {
+        
+        NSMutableString *addressString = [NSMutableString string];
+        GMSAddress *addressObject = response.firstResult;
+        
+        if (addressObject && !error)
+        {
+            if (addressObject.thoroughfare)
+            {
+                [addressString appendString:addressObject.thoroughfare];
+            }
+
+            // Update the GUI
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.statusLabel.text = NSLocalizedString(@"CURRENT_LOCATION", @"");
+                self.addressLabel.text = addressString;
+                
+                // Do not hide the Google logo
+                UIEdgeInsets mapInsets = UIEdgeInsetsMake(0.0, 0.0, CGRectGetHeight(self.addressLabel.superview.bounds)+CGRectGetHeight(self.statusLabel.superview.bounds), 0.0);
+                
+                self.bottomConstraint.constant = 0.0f;
+                [UIView animateWithDuration:0.5 animations: ^{
+                    self.map.padding = mapInsets;
+                    [self.view layoutIfNeeded];
+                }];
+            });
+        }
+    }];
+}
+
+
+-(void)reset
+{
+    self.statusLabel.text = @"";
+
+    self.myLocationMarker = nil;
+    
+    [self.map clear];
+
+    CGFloat addressBarHeight = CGRectGetHeight(self.addressLabel.superview.bounds);
+    
+    UIEdgeInsets mapInsets = UIEdgeInsetsMake(0.0, 0.0, addressBarHeight, 0.0);
+
+    self.bottomConstraint.constant = -addressBarHeight;
+    [UIView animateWithDuration:0.5 animations: ^{
+        self.map.padding = mapInsets;
+        [self.view layoutIfNeeded];
+    }];
+
+    self.locationHelper = nil;
 }
 
 
