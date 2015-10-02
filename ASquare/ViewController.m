@@ -138,17 +138,17 @@
 
 -(void)requestLocation
 {
-    self.statusLabel.text = NSLocalizedString(@"GETTING_LOCATION", @"Status text while requesting the curent location");
-
     _locationHelper = [[LocationHelper alloc] init];
 
     [self.locationHelper findMyLocationWithSucces: ^(CLLocation *myLocation, BOOL finished, NSError *error) {
         if (error)
         {
+            self.statusLabel.text = NSLocalizedString(@"GETTING_LOCATION_FAILURE", @"Status text when the location cannot be fetched");
             [self handleLocationAuthorizationError];
         }
         else
         {
+            self.statusLabel.text = NSLocalizedString(@"GETTING_LOCATION", @"Status text while requesting the curent location");
             if (self.myLocationMarker)
             {
                 self.myLocationMarker.position = myLocation.coordinate;
@@ -205,7 +205,7 @@
         }
         else
         {
-            // NSLog(@"Failed to fetch address: %@", [error description]);
+            self.statusLabel.text = NSLocalizedString(@"GETTING_ADDRESS_FAILURE", @"Status text when reverse geocoding fails");
         }
     }];
 }
