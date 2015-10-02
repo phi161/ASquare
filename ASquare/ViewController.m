@@ -71,6 +71,9 @@
     // Do not hide the Google logo
     UIEdgeInsets mapInsets = UIEdgeInsetsMake(0.0, 0.0, CGRectGetHeight(self.statusLabel.superview.bounds), 0.0);
     self.map.padding = mapInsets;
+    
+    // Start looking for the location and address
+    [self requestLocation];
 }
 
 
@@ -107,14 +110,29 @@
 
 -(void)homeButtonTapped:(id)sender
 {
-    [self requestLocation];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Reset to initial state?" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+
+    [alert addAction:[UIAlertAction actionWithTitle:@"Reset"
+                                              style:UIAlertActionStyleDestructive
+                                            handler: ^(UIAlertAction *_Nonnull action) {
+                                                [self reset];
+                                                [self requestLocation];
+                                            }]];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"Cancel"
+                                              style:UIAlertActionStyleCancel
+                                            handler: ^(UIAlertAction *_Nonnull action) {
+                                                [self dismissViewControllerAnimated:YES
+                                                                         completion:nil];
+                                            }]];
+    
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 
 -(void)closeButtonTapped:(id)sender
 {
-    [self reset];
-    [self requestLocation];
+    //
 }
 
 
@@ -139,8 +157,6 @@
             }
             else
             {
-                self.statusLabel.text = NSLocalizedString(@"CURRENT_LOCATION", @"");
-
                 [self.map animateToLocation:myLocation.coordinate];
                 [self.map animateToZoom:16];
                 
