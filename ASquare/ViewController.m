@@ -126,7 +126,7 @@
     
     _locationHelper = [[LocationHelper alloc] init];
     
-    [self.locationHelper findMyLocationWithSucces: ^(CLLocation *myLocation, NSError *error) {
+    [self.locationHelper findMyLocationWithSucces: ^(CLLocation *myLocation, BOOL finished, NSError *error) {
         if (error)
         {
             [self handleLocationAuthorizationError];
@@ -147,7 +147,10 @@
                 self.myLocationMarker = [GMSMarker markerWithPosition:myLocation.coordinate];
                 [self.myLocationMarker setIcon:[UIImage imageNamed:@"ico-mylocation-pin"]];
                 self.myLocationMarker.map = self.map;
-                
+            }
+            
+            if (finished)
+            {
                 [self requestAddress];
             }
         }

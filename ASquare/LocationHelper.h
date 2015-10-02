@@ -9,7 +9,7 @@
 @import CoreLocation;
 @import Foundation;
 
-typedef void (^LocationHelperCompletionBlock)(CLLocation *, NSError *);
+typedef void (^LocationHelperCompletionBlock)(CLLocation *location, BOOL finished, NSError *error);
 
 /**
    This class is responsible for handling authorization of location services and returning the user's location. When reaching the desired accuracy, the location updated are stopped in order to save battery.

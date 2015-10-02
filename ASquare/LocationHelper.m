@@ -21,6 +21,12 @@
 
 #pragma mark - Setup
 
+-(void)dealloc
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+}
+
+
 -(instancetype)init
 {
     self = [super init];
@@ -57,6 +63,8 @@
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray <CLLocation *> *)locations
 {
+    BOOL finished = NO;
+    
     CLLocation *lastLocation = [locations lastObject];
 
     // Discard locations that are too old
@@ -79,12 +87,13 @@
         if (lastLocation.horizontalAccuracy <= manager.desiredAccuracy)
         {
             [self.locationManager stopUpdatingLocation];
+            finished = YES;
         }
     }
 
     if (self.block)
     {
-        self.block(self.optimalLocation, nil);
+        self.block(self.optimalLocation, finished, nil);
     }
 }
 
@@ -105,14 +114,14 @@
         case kCLAuthorizationStatusDenied: // Pass an error
             if (self.block)
             {
-                self.block(nil, [NSError errorWithDomain:@"LocationHelperError" code:kCLAuthorizationStatusDenied userInfo:nil]);
+                self.block(nil, YES, [NSError errorWithDomain:@"LocationHelperError" code:kCLAuthorizationStatusDenied userInfo:nil]);
             }
             break;
 
         case kCLAuthorizationStatusRestricted: // Pass an error
             if (self.block)
             {
-                self.block(nil, [NSError errorWithDomain:@"LocationHelperError" code:kCLAuthorizationStatusRestricted userInfo:nil]);
+                self.block(nil, YES, [NSError errorWithDomain:@"LocationHelperError" code:kCLAuthorizationStatusRestricted userInfo:nil]);
             }
             break;
 
