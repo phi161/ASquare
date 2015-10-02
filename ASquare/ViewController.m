@@ -32,7 +32,7 @@
 
 -(void)dealloc
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    // NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 
@@ -54,7 +54,7 @@
     [super viewDidLoad];
 
     self.statusLabel.text = @"";
-    
+
     // Title View
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Logo"]];
 
@@ -71,7 +71,7 @@
     // Do not hide the Google logo
     UIEdgeInsets mapInsets = UIEdgeInsetsMake(0.0, 0.0, CGRectGetHeight(self.statusLabel.superview.bounds), 0.0);
     self.map.padding = mapInsets;
-    
+
     // Start looking for the location and address
     [self requestLocation];
 }
@@ -81,19 +81,18 @@
 
 -(void)handleLocationAuthorizationError
 {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"LOCATION_AUTH_ERROR_TITLE", @"") message:NSLocalizedString(@"LOCATION_AUTH_ERROR_MESSAGE", @"") preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"LOCATION_AUTH_ERROR_TITLE", @"Alert title when the location services are not available") message:NSLocalizedString(@"LOCATION_AUTH_ERROR_MESSAGE", @"Alert message when the location services are not available") preferredStyle:UIAlertControllerStyleAlert];
 
-    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"LOCATION_AUTH_SETTINGS", @"")
+    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"LOCATION_AUTH_SETTINGS", @"Alert button that opens the application settings")
                                               style:UIAlertActionStyleDefault
                                             handler: ^(UIAlertAction *_Nonnull action) {
         [self openApplicationSettings];
     }]];
 
-    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"LOCATION_AUTH_CANCEL", @"")
+    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"LOCATION_AUTH_CANCEL", @"Alert cancel button")
                                               style:UIAlertActionStyleCancel
                                             handler: ^(UIAlertAction *_Nonnull action) {
-        [self dismissViewControllerAnimated:YES
-                                 completion:nil];
+        [self dismissViewControllerAnimated:YES completion:nil];
     }]];
 
     [self presentViewController:alert animated:YES completion:nil];
@@ -115,17 +114,16 @@
     [alert addAction:[UIAlertAction actionWithTitle:@"Reset"
                                               style:UIAlertActionStyleDestructive
                                             handler: ^(UIAlertAction *_Nonnull action) {
-                                                [self reset];
-                                                [self requestLocation];
-                                            }]];
-    
+        [self reset];
+        [self requestLocation];
+    }]];
+
     [alert addAction:[UIAlertAction actionWithTitle:@"Cancel"
                                               style:UIAlertActionStyleCancel
                                             handler: ^(UIAlertAction *_Nonnull action) {
-                                                [self dismissViewControllerAnimated:YES
-                                                                         completion:nil];
-                                            }]];
-    
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }]];
+
     [self presentViewController:alert animated:YES completion:nil];
 }
 
@@ -140,10 +138,10 @@
 
 -(void)requestLocation
 {
-    self.statusLabel.text = NSLocalizedString(@"GETTING_LOCATION", @"");
-    
+    self.statusLabel.text = NSLocalizedString(@"GETTING_LOCATION", @"Status text while requesting the curent location");
+
     _locationHelper = [[LocationHelper alloc] init];
-    
+
     [self.locationHelper findMyLocationWithSucces: ^(CLLocation *myLocation, BOOL finished, NSError *error) {
         if (error)
         {
@@ -159,12 +157,12 @@
             {
                 [self.map animateToLocation:myLocation.coordinate];
                 [self.map animateToZoom:16];
-                
+
                 self.myLocationMarker = [GMSMarker markerWithPosition:myLocation.coordinate];
                 [self.myLocationMarker setIcon:[UIImage imageNamed:@"ico-mylocation-pin"]];
                 self.myLocationMarker.map = self.map;
             }
-            
+
             if (finished)
             {
                 [self requestAddress];
@@ -176,13 +174,13 @@
 
 -(void)requestAddress
 {
-    self.statusLabel.text = NSLocalizedString(@"GETTING_ADDRESS", @"");
+    self.statusLabel.text = NSLocalizedString(@"GETTING_ADDRESS", @"Status text while waiting for reverse geocoding");
 
-    [[GMSGeocoder geocoder] reverseGeocodeCoordinate:self.myLocationMarker.position completionHandler:^(GMSReverseGeocodeResponse* response, NSError* error) {
-        
+    [[GMSGeocoder geocoder] reverseGeocodeCoordinate:self.myLocationMarker.position
+                                   completionHandler: ^(GMSReverseGeocodeResponse *response, NSError *error) {
         NSMutableString *addressString = [NSMutableString string];
         GMSAddress *addressObject = response.firstResult;
-        
+
         if (addressObject && !error)
         {
             if (addressObject.thoroughfare)
@@ -192,18 +190,22 @@
 
             // Update the GUI
             dispatch_async(dispatch_get_main_queue(), ^{
-                self.statusLabel.text = NSLocalizedString(@"CURRENT_LOCATION", @"");
+                self.statusLabel.text = NSLocalizedString(@"CURRENT_LOCATION", @"The text to display when the current location is found");
                 self.addressLabel.text = addressString;
-                
+
                 // Do not hide the Google logo
-                UIEdgeInsets mapInsets = UIEdgeInsetsMake(0.0, 0.0, CGRectGetHeight(self.addressLabel.superview.bounds)+CGRectGetHeight(self.statusLabel.superview.bounds), 0.0);
-                
+                UIEdgeInsets mapInsets = UIEdgeInsetsMake(0.0, 0.0, CGRectGetHeight(self.addressLabel.superview.bounds) + CGRectGetHeight(self.statusLabel.superview.bounds), 0.0);
+
                 self.bottomConstraint.constant = 0.0f;
                 [UIView animateWithDuration:0.5 animations: ^{
                     self.map.padding = mapInsets;
                     [self.view layoutIfNeeded];
                 }];
             });
+        }
+        else
+        {
+            // NSLog(@"Failed to fetch address: %@", [error description]);
         }
     }];
 }
@@ -214,11 +216,11 @@
     self.statusLabel.text = @"";
 
     self.myLocationMarker = nil;
-    
+
     [self.map clear];
 
     CGFloat addressBarHeight = CGRectGetHeight(self.addressLabel.superview.bounds);
-    
+
     UIEdgeInsets mapInsets = UIEdgeInsetsMake(0.0, 0.0, addressBarHeight, 0.0);
 
     self.bottomConstraint.constant = -addressBarHeight;
