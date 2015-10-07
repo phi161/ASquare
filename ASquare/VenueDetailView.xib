@@ -7,10 +7,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VenueDetailView">
             <connections>
+                <outlet property="addressLabel" destination="1NG-Nd-bPh" id="o3L-Ax-SiN"/>
+                <outlet property="categoryNameLabel" destination="fs1-NW-tZL" id="hzA-eh-Wjv"/>
+                <outlet property="nameLabel" destination="202-r2-KWQ" id="TXG-Fb-JAi"/>
                 <outlet property="ratingLabel" destination="QZR-vF-vW9" id="KvP-WT-4lW"/>
                 <outlet property="ratingView" destination="9Sx-42-c1F" id="o3e-bw-g7n"/>
                 <outlet property="venueImageView" destination="Ih7-KS-xXM" id="DQH-ht-7Fn"/>
-                <outlet property="venueInfoLabel" destination="1NG-Nd-bPh" id="2Lf-QP-H0F"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -18,18 +20,16 @@
             <rect key="frame" x="0.0" y="0.0" width="413" height="134"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ih7-KS-xXM">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ih7-KS-xXM">
                     <rect key="frame" x="0.0" y="13" width="108" height="108"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="108" id="ged-6K-waV"/>
                         <constraint firstAttribute="height" constant="108" id="jvC-Jq-Bdy"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1NG-Nd-bPh">
-                    <rect key="frame" x="122" y="47" width="211" height="41"/>
-                    <string key="text">Label
-Label</string>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="address" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1NG-Nd-bPh">
+                    <rect key="frame" x="122" y="72" width="211" height="14"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -51,15 +51,35 @@ Label</string>
                         <constraint firstItem="QZR-vF-vW9" firstAttribute="centerY" secondItem="9Sx-42-c1F" secondAttribute="centerY" id="vHu-HJ-PtP"/>
                     </constraints>
                 </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="category name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fs1-NW-tZL">
+                    <rect key="frame" x="122" y="86" width="211" height="15"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="202-r2-KWQ">
+                    <rect key="frame" x="122" y="29" width="211" height="43"/>
+                    <string key="text">name 1
+name 2</string>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="18"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="9Sx-42-c1F" firstAttribute="centerY" secondItem="Rmn-Mz-fSd" secondAttribute="centerY" id="16Q-ES-inu"/>
                 <constraint firstAttribute="trailing" secondItem="9Sx-42-c1F" secondAttribute="trailing" constant="14" id="Br0-wi-Uae"/>
                 <constraint firstItem="Ih7-KS-xXM" firstAttribute="centerY" secondItem="Rmn-Mz-fSd" secondAttribute="centerY" id="CWn-cJ-quQ"/>
+                <constraint firstItem="fs1-NW-tZL" firstAttribute="leading" secondItem="Ih7-KS-xXM" secondAttribute="trailing" constant="14" id="Mxn-bo-aMc"/>
+                <constraint firstItem="1NG-Nd-bPh" firstAttribute="top" secondItem="202-r2-KWQ" secondAttribute="bottom" id="THj-T4-V7q"/>
                 <constraint firstItem="Ih7-KS-xXM" firstAttribute="leading" secondItem="Rmn-Mz-fSd" secondAttribute="leading" id="Zr3-gb-B90"/>
-                <constraint firstItem="1NG-Nd-bPh" firstAttribute="centerY" secondItem="Rmn-Mz-fSd" secondAttribute="centerY" id="oaD-ar-Zui"/>
+                <constraint firstItem="202-r2-KWQ" firstAttribute="leading" secondItem="Ih7-KS-xXM" secondAttribute="trailing" constant="14" id="eZV-kl-zb0"/>
+                <constraint firstItem="fs1-NW-tZL" firstAttribute="top" secondItem="1NG-Nd-bPh" secondAttribute="bottom" id="kzL-lr-beC"/>
+                <constraint firstItem="1NG-Nd-bPh" firstAttribute="centerY" secondItem="Rmn-Mz-fSd" secondAttribute="centerY" constant="12" id="oaD-ar-Zui"/>
                 <constraint firstItem="1NG-Nd-bPh" firstAttribute="leading" secondItem="Ih7-KS-xXM" secondAttribute="trailing" constant="14" id="pmC-ln-Xxr"/>
+                <constraint firstItem="9Sx-42-c1F" firstAttribute="leading" secondItem="fs1-NW-tZL" secondAttribute="trailing" constant="14" id="w8K-bK-7kH"/>
+                <constraint firstItem="9Sx-42-c1F" firstAttribute="leading" secondItem="202-r2-KWQ" secondAttribute="trailing" constant="14" id="yZP-JN-CtM"/>
                 <constraint firstItem="9Sx-42-c1F" firstAttribute="leading" secondItem="1NG-Nd-bPh" secondAttribute="trailing" constant="14" id="zWi-hP-e5V"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

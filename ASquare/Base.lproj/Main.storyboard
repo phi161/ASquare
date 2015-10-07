@@ -113,7 +113,7 @@ label</string>
                         <outlet property="bottomConstraint" destination="NCu-QZ-Z2R" id="ORN-pv-6ym"/>
                         <outlet property="map" destination="jgh-FG-S6M" id="5Xo-dU-OBG"/>
                         <outlet property="statusLabel" destination="kG6-Ur-Yil" id="OPT-RO-nAg"/>
-                        <outlet property="venueDetailView" destination="0es-x6-U84" id="EHq-gx-6xC"/>
+                        <outlet property="venueDetailContainer" destination="0es-x6-U84" id="kaN-En-j12"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rNM-v6-vaN" userLabel="First Responder" sceneMemberID="firstResponder"/>

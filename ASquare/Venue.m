@@ -7,6 +7,7 @@
 //
 
 #import "Venue.h"
+#import "UIColor+CASColorPalette.h"
 
 @implementation Venue
 
@@ -35,7 +36,8 @@
 
         if (dictionary[@"bestPhoto"])
         {
-            _imagePath = [NSString stringWithFormat:@"%@200x200%@", [dictionary valueForKeyPath:@"bestPhoto.prefix"], [dictionary valueForKeyPath:@"bestPhoto.suffix"]];
+            // See https://developer.foursquare.com/docs/responses/photo for more options than "original"
+            _imagePath = [NSString stringWithFormat:@"%@original%@", [dictionary valueForKeyPath:@"bestPhoto.prefix"], [dictionary valueForKeyPath:@"bestPhoto.suffix"]];
         }
 
         _rating = dictionary[@"rating"];
@@ -50,6 +52,8 @@
     return [NSString stringWithFormat:@"[%@]\t%@\n[%.01f]\t%@", self.venueId, self.name, [self.rating floatValue], self.imagePath];
 }
 
+
+#pragma mark - Presentation
 
 -(NSString *)ratingString
 {
