@@ -10,6 +10,11 @@
 
 @interface UIImage (CASExtensions)
 
+/**
+   Composes two images at the given position
+   @param overlayh The image to compose on top of the receiver
+   @param position The position of the overlay image
+ */
 -(UIImage *)cas_imageWithOverlay:(UIImage *)overlay atPosition:(CGPoint)position;
 
 @end
