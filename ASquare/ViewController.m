@@ -12,6 +12,7 @@
 #import "Venue.h"
 #import "FoursquareService.h"
 #import "UIImage+CASExtensions.h"
+#import "VenueDetailView.h"
 
 @interface ViewController () <GMSMapViewDelegate>
 
@@ -19,6 +20,9 @@
 @property (nonatomic, strong) IBOutlet UILabel *statusLabel;
 @property (nonatomic, strong) IBOutlet UILabel *addressLabel;
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *bottomConstraint;
+@property (nonatomic, strong) IBOutlet UIView *venueDetailContainer;
+@property (nonatomic, strong) VenueDetailView *venueDetailView;
+
 @property (nonatomic, strong) GMSMarker *myLocationMarker;
 @property (nonatomic, strong) LocationHelper *locationHelper;
 @property (nonatomic, strong) FoursquareService *foursquareService;
@@ -29,6 +33,7 @@
 -(void)closeButtonTapped:(id)sender;
 -(void)homeButtonTapped:(id)sender;
 -(void)reset;
+-(void)setupDetailView;
 
 @end
 
@@ -70,6 +75,8 @@
 {
     [super viewDidLoad];
 
+    self.venueDetailContainer.layer.cornerRadius = 5.0f;
+
     self.statusLabel.text = @"";
 
     // Title View
@@ -91,6 +98,23 @@
 
     // Start looking for the location and address
     [self requestLocation];
+
+    [self setupDetailView];
+}
+
+
+-(void)setupDetailView
+{
+    self.venueDetailView = [[VenueDetailView alloc] initWithFrame:CGRectZero];
+    [self.venueDetailContainer addSubview:self.venueDetailView];
+    
+    CGFloat inset = 6.0f;
+    [self.venueDetailContainer addConstraint:[NSLayoutConstraint constraintWithItem:self.venueDetailView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.venueDetailContainer attribute:NSLayoutAttributeTop multiplier:1.0f constant:inset]];
+    [self.venueDetailContainer addConstraint:[NSLayoutConstraint constraintWithItem:self.venueDetailView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.venueDetailContainer attribute:NSLayoutAttributeLeading multiplier:1.0f constant:inset]];
+    [self.venueDetailContainer addConstraint:[NSLayoutConstraint constraintWithItem:self.venueDetailView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.venueDetailContainer attribute:NSLayoutAttributeTrailing multiplier:1.0f constant:-inset]];
+    [self.venueDetailContainer addConstraint:[NSLayoutConstraint constraintWithItem:self.venueDetailView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.venueDetailContainer attribute:NSLayoutAttributeBottom multiplier:1.0f constant:-inset]];
+    
+    self.venueDetailContainer.alpha = 0.0f;
 }
 
 
@@ -256,8 +280,15 @@
 
 -(void)mapView:(GMSMapView *)mapView idleAtCameraPosition:(GMSCameraPosition *)position
 {
+    // Clear map but keep showing "my location"
     [mapView clear];
     self.myLocationMarker.map = self.map;
+    
+    // Hide the detail view
+    [UIView animateWithDuration:0.2f animations:^{
+        self.venueDetailContainer.alpha = 0.0f;
+    }];
+
     
     [self.foursquareService venuesForLocationWithLatitude:position.target.latitude longitude:position.target.longitude completion:^(NSArray *venues, NSError *error) {
         if (error)
@@ -311,9 +342,20 @@
         // The selected venue is missing information about the rating & best image so add it
         selectedVenue.imagePath = venue.imagePath;
         selectedVenue.rating = venue.rating;
-        
-        NSLog(@"%@", selectedVenue);
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [UIView animateWithDuration:0.2f animations:^{
+                self.venueDetailContainer.alpha = 0.0f;
+            } completion:^(BOOL finished) {
+                self.venueDetailView.venue = selectedVenue;
+                [UIView animateWithDuration:0.2f animations:^{
+                    self.venueDetailContainer.alpha = 1.0f;
+                }];
+            }];
+        });
     }];
+
+    
 
     return YES;
 }
