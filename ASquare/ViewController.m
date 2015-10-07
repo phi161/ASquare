@@ -171,7 +171,19 @@
 
 -(void)closeButtonTapped:(id)sender
 {
-    //
+    // Hide the detail view
+    [UIView animateWithDuration:0.2f animations:^{
+        self.venueDetailContainer.alpha = 0.0f;
+    }];
+    
+    // Reset the selected marker
+    if (self.selectedMarker)
+    {
+        Venue *previouslySelectedVenue = (Venue *)self.selectedMarker.userData;
+        self.selectedMarker.icon = [self.venueMarkerImage cas_imageWithOverlay:previouslySelectedVenue.iconImage atPosition:CGPointMake(-1, -1)];
+    }
+    
+    self.selectedMarker = nil;
 }
 
 
