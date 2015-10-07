@@ -32,6 +32,13 @@
             _categoryImagePath = [NSString stringWithFormat:@"%@64%@", [category valueForKeyPath:@"icon.prefix"], [category valueForKeyPath:@"icon.suffix"]];
             _categoryName = category[@"name"];
         }
+
+        if (dictionary[@"bestPhoto"])
+        {
+            _imagePath = [NSString stringWithFormat:@"%@200x200%@", [dictionary valueForKeyPath:@"bestPhoto.prefix"], [dictionary valueForKeyPath:@"bestPhoto.suffix"]];
+        }
+
+        _rating = dictionary[@"rating"];
     }
 
     return self;
@@ -40,7 +47,7 @@
 
 -(NSString *)description
 {
-    return [NSString stringWithFormat:@"[%@] %@ - %@", self.venueId, self.name, self.categoryName];
+    return [NSString stringWithFormat:@"[%@]\t%@\n[%.01f]\t%@", self.venueId, self.name, [self.rating floatValue], self.imagePath];
 }
 
 

@@ -11,7 +11,8 @@
 
 @interface FoursquareService ()
 
-@property (nonatomic, copy) VenueSearchCompletionBlock completionBlock;
+@property (nonatomic, copy) VenueSearchCompletionBlock searchCompletionBlock;
+@property (nonatomic, copy) VenueDetailsCompletionBlock detailsCompletionBlock;
 @property (nonatomic, copy) NSString *clientId;
 @property (nonatomic, copy) NSString *clientSecret;
 @property (nonatomic, copy) NSString *baseURLString;
@@ -35,7 +36,7 @@
         _clientId = keys[@"FoursquareClientId"];
         _clientSecret = keys[@"FoursquareClientSecret"];
         
-        _baseURLString = @"https://api.foursquare.com/v2/venues/search";
+        _baseURLString = @"https://api.foursquare.com/";
         _apiVersion = @"20150319"; // Just a recent date
     }
     
@@ -45,9 +46,10 @@
 
 -(void)venuesForLocationWithLatitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude completion:(VenueSearchCompletionBlock)completion
 {
-    self.completionBlock = [completion copy];
+    self.searchCompletionBlock = [completion copy];
     
     NSURLComponents *components = [NSURLComponents componentsWithString:self.baseURLString];
+    components.path = @"/v2/venues/search";
     NSURLQueryItem *clientId = [NSURLQueryItem queryItemWithName:@"client_id" value:self.clientId];
     NSURLQueryItem *clientSecret = [NSURLQueryItem queryItemWithName:@"client_secret" value:self.clientSecret];
     NSURLQueryItem *version = [NSURLQueryItem queryItemWithName:@"v" value:self.apiVersion];
@@ -58,7 +60,7 @@
     NSURLSessionDataTask *dataTask = [[NSURLSession sharedSession] dataTaskWithURL:components.URL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error)
         {
-            self.completionBlock(nil, error);
+            self.searchCompletionBlock(nil, error);
         }
         else
         {
@@ -66,7 +68,7 @@
             NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
             if (jsonError)
             {
-                self.completionBlock(nil, jsonError);
+                self.searchCompletionBlock(nil, jsonError);
             }
             else
             {
@@ -77,7 +79,44 @@
                     [mutableVenuesArray addObject:venue];
                 }];
                 
-                self.completionBlock([mutableVenuesArray copy], nil);
+                self.searchCompletionBlock([mutableVenuesArray copy], nil);
+            }
+        }
+    }];
+    
+    [dataTask resume];
+}
+
+
+-(void)venueForId:(NSString *)venueId completion:(VenueDetailsCompletionBlock)completion
+{
+    self.detailsCompletionBlock = [completion copy];
+    
+    NSURLComponents *components = [NSURLComponents componentsWithString:self.baseURLString];
+    components.path = [NSString stringWithFormat:@"/v2/venues/%@", venueId];
+    NSURLQueryItem *clientId = [NSURLQueryItem queryItemWithName:@"client_id" value:self.clientId];
+    NSURLQueryItem *clientSecret = [NSURLQueryItem queryItemWithName:@"client_secret" value:self.clientSecret];
+    NSURLQueryItem *version = [NSURLQueryItem queryItemWithName:@"v" value:self.apiVersion];
+    components.queryItems = @[clientId, clientSecret, version];
+    
+    NSURLSessionDataTask *dataTask = [[NSURLSession sharedSession] dataTaskWithURL:components.URL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (error)
+        {
+            self.detailsCompletionBlock(nil, error);
+        }
+        else
+        {
+            NSError *jsonError = nil;
+            NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
+            if (jsonError)
+            {
+                self.detailsCompletionBlock(nil, jsonError);
+            }
+            else
+            {
+                NSDictionary *venueDictionary = result[@"response"][@"venue"];
+                Venue *venue = [[Venue alloc] initWithDictionary:venueDictionary];
+                self.detailsCompletionBlock(venue, nil);
             }
         }
     }];
