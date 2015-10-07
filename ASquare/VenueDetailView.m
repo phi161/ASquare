@@ -7,6 +7,8 @@
 //
 
 #import "VenueDetailView.h"
+#import "Venue.h"
+#import "UIColor+CASColorPalette.h"
 
 @interface VenueDetailView ()
 
@@ -34,6 +36,12 @@
     [self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:nibView attribute:NSLayoutAttributeBottom multiplier:1.0f constant:inset]];
     [self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:nibView attribute:NSLayoutAttributeLeading multiplier:1.0f constant:-inset]];
     [self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:nibView attribute:NSLayoutAttributeTrailing multiplier:1.0f constant:inset]];
+
+    // Rating View
+    self.ratingView.backgroundColor = [UIColor cas_contessaColor];
+    self.ratingView.layer.cornerRadius = 26.0f;
+    self.ratingView.layer.borderColor = [UIColor cas_tonysPinkColor].CGColor;
+    self.ratingView.layer.borderWidth = 4.0f;
 }
 
 
@@ -58,6 +66,19 @@
     }
 
     return self;
+}
+
+
+-(void)setVenue:(Venue *)venue
+{
+    if (venue != _venue)
+    {
+        _venue = venue;
+        
+        self.venueInfoLabel.text = venue.name;
+        self.ratingLabel.text = [venue ratingString];
+        self.venueImageView.image = venue.iconImage;
+    }
 }
 
 

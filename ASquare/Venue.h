@@ -24,4 +24,6 @@
 
 -(id)initWithDictionary:(NSDictionary *)dictionary;
 
+-(NSString *)ratingString;
+
 @end

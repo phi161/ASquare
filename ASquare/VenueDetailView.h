@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class Venue;
 
 @interface VenueDetailView : UIView
+
+@property (nonatomic, strong) Venue *venue;
 
 @end

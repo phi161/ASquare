@@ -51,4 +51,15 @@
 }
 
 
+-(NSString *)ratingString
+{
+    if (self.rating)
+    {
+        return [NSString stringWithFormat:@"%.01f", [self.rating doubleValue]];
+    }
+    
+    return @"-";
+}
+
+
 @end
