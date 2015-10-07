@@ -13,6 +13,7 @@
 		CFCFD6591BC49C750086EA9F /* UIImage+CASExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = CFCFD6581BC49C750086EA9F /* UIImage+CASExtensions.m */; settings = {ASSET_TAGS = (); }; };
 		CFCFD65C1BC534B80086EA9F /* VenueDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = CFCFD65B1BC534B80086EA9F /* VenueDetailView.m */; settings = {ASSET_TAGS = (); }; };
 		CFCFD65E1BC537820086EA9F /* VenueDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFCFD65D1BC537820086EA9F /* VenueDetailView.xib */; settings = {ASSET_TAGS = (); }; };
+		CFCFD6611BC54FB20086EA9F /* UIColor+CASColorPalette.m in Sources */ = {isa = PBXBuildFile; fileRef = CFCFD6601BC54FB20086EA9F /* UIColor+CASColorPalette.m */; settings = {ASSET_TAGS = (); }; };
 		CFE3647E1BBC4343004B782B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE3647D1BBC4343004B782B /* main.m */; };
 		CFE364811BBC4343004B782B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE364801BBC4343004B782B /* AppDelegate.m */; };
 		CFE364841BBC4343004B782B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE364831BBC4343004B782B /* ViewController.m */; };
@@ -38,6 +39,8 @@
 		CFCFD65A1BC534B80086EA9F /* VenueDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VenueDetailView.h; sourceTree = "<group>"; };
 		CFCFD65B1BC534B80086EA9F /* VenueDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VenueDetailView.m; sourceTree = "<group>"; };
 		CFCFD65D1BC537820086EA9F /* VenueDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VenueDetailView.xib; sourceTree = "<group>"; };
+		CFCFD65F1BC54FB20086EA9F /* UIColor+CASColorPalette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+CASColorPalette.h"; sourceTree = "<group>"; };
+		CFCFD6601BC54FB20086EA9F /* UIColor+CASColorPalette.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CASColorPalette.m"; sourceTree = "<group>"; };
 		CFE364791BBC4343004B782B /* ASquare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ASquare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFE3647D1BBC4343004B782B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CFE3647F1BBC4343004B782B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -91,6 +94,8 @@
 				CFCFD6551BC48D960086EA9F /* FoursquareService.m */,
 				CFE364931BBC7842004B782B /* LocationHelper.h */,
 				CFE364941BBC7842004B782B /* LocationHelper.m */,
+				CFCFD65F1BC54FB20086EA9F /* UIColor+CASColorPalette.h */,
+				CFCFD6601BC54FB20086EA9F /* UIColor+CASColorPalette.m */,
 				CFCFD6571BC49C750086EA9F /* UIImage+CASExtensions.h */,
 				CFCFD6581BC49C750086EA9F /* UIImage+CASExtensions.m */,
 				CFCFD6511BC3FD7E0086EA9F /* Venue.h */,
@@ -254,6 +259,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CFE364951BBC7842004B782B /* LocationHelper.m in Sources */,
+				CFCFD6611BC54FB20086EA9F /* UIColor+CASColorPalette.m in Sources */,
 				CFE364841BBC4343004B782B /* ViewController.m in Sources */,
 				CFCFD6561BC48D960086EA9F /* FoursquareService.m in Sources */,
 				CFCFD6591BC49C750086EA9F /* UIImage+CASExtensions.m in Sources */,
