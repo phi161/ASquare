@@ -268,6 +268,8 @@
 
 -(void)reset
 {
+    self.venueDetailContainer.alpha = 0.0f;
+
     self.statusLabel.text = @"";
 
     self.myLocationMarker = nil;
