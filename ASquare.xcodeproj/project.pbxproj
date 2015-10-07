@@ -7,15 +7,40 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CFB7F6741BBEB9380016DC83 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CFB7F6731BBEB9380016DC83 /* Localizable.strings */; settings = {ASSET_TAGS = (); }; };
+		CFCFD6531BC3FD7E0086EA9F /* Venue.m in Sources */ = {isa = PBXBuildFile; fileRef = CFCFD6521BC3FD7E0086EA9F /* Venue.m */; settings = {ASSET_TAGS = (); }; };
+		CFCFD6561BC48D960086EA9F /* FoursquareService.m in Sources */ = {isa = PBXBuildFile; fileRef = CFCFD6551BC48D960086EA9F /* FoursquareService.m */; settings = {ASSET_TAGS = (); }; };
+		CFCFD6591BC49C750086EA9F /* UIImage+CASExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = CFCFD6581BC49C750086EA9F /* UIImage+CASExtensions.m */; settings = {ASSET_TAGS = (); }; };
+		CFCFD65C1BC534B80086EA9F /* VenueDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = CFCFD65B1BC534B80086EA9F /* VenueDetailView.m */; settings = {ASSET_TAGS = (); }; };
+		CFCFD65E1BC537820086EA9F /* VenueDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFCFD65D1BC537820086EA9F /* VenueDetailView.xib */; settings = {ASSET_TAGS = (); }; };
+		CFCFD6611BC54FB20086EA9F /* UIColor+CASColorPalette.m in Sources */ = {isa = PBXBuildFile; fileRef = CFCFD6601BC54FB20086EA9F /* UIColor+CASColorPalette.m */; settings = {ASSET_TAGS = (); }; };
 		CFE3647E1BBC4343004B782B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE3647D1BBC4343004B782B /* main.m */; };
 		CFE364811BBC4343004B782B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE364801BBC4343004B782B /* AppDelegate.m */; };
 		CFE364841BBC4343004B782B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE364831BBC4343004B782B /* ViewController.m */; };
 		CFE364871BBC4343004B782B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CFE364851BBC4343004B782B /* Main.storyboard */; };
 		CFE364891BBC4343004B782B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFE364881BBC4343004B782B /* Assets.xcassets */; };
 		CFE3648C1BBC4343004B782B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CFE3648A1BBC4343004B782B /* LaunchScreen.storyboard */; };
+		CFE364951BBC7842004B782B /* LocationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE364941BBC7842004B782B /* LocationHelper.m */; settings = {ASSET_TAGS = (); }; };
+		CFE364971BBD5DF0004B782B /* APIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFE364961BBD5DF0004B782B /* APIKeys.plist */; settings = {ASSET_TAGS = (); }; };
+		E13FDF9A75BCCF52A1842319 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D9184F4169B12E04B91F98B /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		18F26783357F47649DF9133E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		2D9184F4169B12E04B91F98B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		31DCB645DA2E3F4075BEC3CA /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		CFB7F6731BBEB9380016DC83 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		CFCFD6511BC3FD7E0086EA9F /* Venue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Venue.h; sourceTree = "<group>"; };
+		CFCFD6521BC3FD7E0086EA9F /* Venue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Venue.m; sourceTree = "<group>"; };
+		CFCFD6541BC48D960086EA9F /* FoursquareService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoursquareService.h; sourceTree = "<group>"; };
+		CFCFD6551BC48D960086EA9F /* FoursquareService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoursquareService.m; sourceTree = "<group>"; };
+		CFCFD6571BC49C750086EA9F /* UIImage+CASExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+CASExtensions.h"; sourceTree = "<group>"; };
+		CFCFD6581BC49C750086EA9F /* UIImage+CASExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CASExtensions.m"; sourceTree = "<group>"; };
+		CFCFD65A1BC534B80086EA9F /* VenueDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VenueDetailView.h; sourceTree = "<group>"; };
+		CFCFD65B1BC534B80086EA9F /* VenueDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VenueDetailView.m; sourceTree = "<group>"; };
+		CFCFD65D1BC537820086EA9F /* VenueDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VenueDetailView.xib; sourceTree = "<group>"; };
+		CFCFD65F1BC54FB20086EA9F /* UIColor+CASColorPalette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+CASColorPalette.h"; sourceTree = "<group>"; };
+		CFCFD6601BC54FB20086EA9F /* UIColor+CASColorPalette.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CASColorPalette.m"; sourceTree = "<group>"; };
 		CFE364791BBC4343004B782B /* ASquare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ASquare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFE3647D1BBC4343004B782B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CFE3647F1BBC4343004B782B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -26,6 +51,9 @@
 		CFE364881BBC4343004B782B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CFE3648B1BBC4343004B782B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CFE3648D1BBC4343004B782B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CFE364931BBC7842004B782B /* LocationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationHelper.h; sourceTree = "<group>"; };
+		CFE364941BBC7842004B782B /* LocationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationHelper.m; sourceTree = "<group>"; };
+		CFE364961BBD5DF0004B782B /* APIKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = APIKeys.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +61,61 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E13FDF9A75BCCF52A1842319 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		29538BDED48002C5703ABFFD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2D9184F4169B12E04B91F98B /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		316A284F290CEEEACF5DB4DB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				31DCB645DA2E3F4075BEC3CA /* Pods.debug.xcconfig */,
+				18F26783357F47649DF9133E /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		CFB7F6751BBEBA860016DC83 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				CFE3647F1BBC4343004B782B /* AppDelegate.h */,
+				CFE364801BBC4343004B782B /* AppDelegate.m */,
+				CFCFD6541BC48D960086EA9F /* FoursquareService.h */,
+				CFCFD6551BC48D960086EA9F /* FoursquareService.m */,
+				CFE364931BBC7842004B782B /* LocationHelper.h */,
+				CFE364941BBC7842004B782B /* LocationHelper.m */,
+				CFCFD65F1BC54FB20086EA9F /* UIColor+CASColorPalette.h */,
+				CFCFD6601BC54FB20086EA9F /* UIColor+CASColorPalette.m */,
+				CFCFD6571BC49C750086EA9F /* UIImage+CASExtensions.h */,
+				CFCFD6581BC49C750086EA9F /* UIImage+CASExtensions.m */,
+				CFCFD6511BC3FD7E0086EA9F /* Venue.h */,
+				CFCFD6521BC3FD7E0086EA9F /* Venue.m */,
+				CFCFD65A1BC534B80086EA9F /* VenueDetailView.h */,
+				CFCFD65B1BC534B80086EA9F /* VenueDetailView.m */,
+				CFCFD65D1BC537820086EA9F /* VenueDetailView.xib */,
+				CFE364821BBC4343004B782B /* ViewController.h */,
+				CFE364831BBC4343004B782B /* ViewController.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
 		CFE364701BBC4343004B782B = {
 			isa = PBXGroup;
 			children = (
 				CFE3647B1BBC4343004B782B /* ASquare */,
 				CFE3647A1BBC4343004B782B /* Products */,
+				316A284F290CEEEACF5DB4DB /* Pods */,
+				29538BDED48002C5703ABFFD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,14 +130,7 @@
 		CFE3647B1BBC4343004B782B /* ASquare */ = {
 			isa = PBXGroup;
 			children = (
-				CFE3647F1BBC4343004B782B /* AppDelegate.h */,
-				CFE364801BBC4343004B782B /* AppDelegate.m */,
-				CFE364821BBC4343004B782B /* ViewController.h */,
-				CFE364831BBC4343004B782B /* ViewController.m */,
-				CFE364851BBC4343004B782B /* Main.storyboard */,
-				CFE364881BBC4343004B782B /* Assets.xcassets */,
-				CFE3648A1BBC4343004B782B /* LaunchScreen.storyboard */,
-				CFE3648D1BBC4343004B782B /* Info.plist */,
+				CFB7F6751BBEBA860016DC83 /* Classes */,
 				CFE3647C1BBC4343004B782B /* Supporting Files */,
 			);
 			path = ASquare;
@@ -75,6 +140,12 @@
 			isa = PBXGroup;
 			children = (
 				CFE3647D1BBC4343004B782B /* main.m */,
+				CFE364961BBD5DF0004B782B /* APIKeys.plist */,
+				CFE3648D1BBC4343004B782B /* Info.plist */,
+				CFB7F6731BBEB9380016DC83 /* Localizable.strings */,
+				CFE364881BBC4343004B782B /* Assets.xcassets */,
+				CFE3648A1BBC4343004B782B /* LaunchScreen.storyboard */,
+				CFE364851BBC4343004B782B /* Main.storyboard */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -86,9 +157,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CFE364901BBC4343004B782B /* Build configuration list for PBXNativeTarget "ASquare" */;
 			buildPhases = (
+				B7861F40515D883EC0A3FC64 /* Check Pods Manifest.lock */,
 				CFE364751BBC4343004B782B /* Sources */,
 				CFE364761BBC4343004B782B /* Frameworks */,
 				CFE364771BBC4343004B782B /* Resources */,
+				42E71FF752FA6D554A5A374E /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -136,7 +209,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFB7F6741BBEB9380016DC83 /* Localizable.strings in Resources */,
+				CFCFD65E1BC537820086EA9F /* VenueDetailView.xib in Resources */,
 				CFE3648C1BBC4343004B782B /* LaunchScreen.storyboard in Resources */,
+				CFE364971BBD5DF0004B782B /* APIKeys.plist in Resources */,
 				CFE364891BBC4343004B782B /* Assets.xcassets in Resources */,
 				CFE364871BBC4343004B782B /* Main.storyboard in Resources */,
 			);
@@ -144,13 +220,52 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		42E71FF752FA6D554A5A374E /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B7861F40515D883EC0A3FC64 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		CFE364751BBC4343004B782B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFE364951BBC7842004B782B /* LocationHelper.m in Sources */,
+				CFCFD6611BC54FB20086EA9F /* UIColor+CASColorPalette.m in Sources */,
 				CFE364841BBC4343004B782B /* ViewController.m in Sources */,
+				CFCFD6561BC48D960086EA9F /* FoursquareService.m in Sources */,
+				CFCFD6591BC49C750086EA9F /* UIImage+CASExtensions.m in Sources */,
 				CFE364811BBC4343004B782B /* AppDelegate.m in Sources */,
+				CFCFD65C1BC534B80086EA9F /* VenueDetailView.m in Sources */,
+				CFCFD6531BC3FD7E0086EA9F /* Venue.m in Sources */,
 				CFE3647E1BBC4343004B782B /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -213,7 +328,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -250,7 +365,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -259,9 +374,12 @@
 		};
 		CFE364911BBC4343004B782B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 31DCB645DA2E3F4075BEC3CA /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ASquare/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = se.carminestudios.ASquare;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -270,9 +388,12 @@
 		};
 		CFE364921BBC4343004B782B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 18F26783357F47649DF9133E /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ASquare/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = se.carminestudios.ASquare;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -298,6 +419,7 @@
 				CFE364921BBC4343004B782B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
