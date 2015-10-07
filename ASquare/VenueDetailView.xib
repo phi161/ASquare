@@ -12,6 +12,7 @@
                 <outlet property="nameLabel" destination="202-r2-KWQ" id="TXG-Fb-JAi"/>
                 <outlet property="ratingLabel" destination="QZR-vF-vW9" id="KvP-WT-4lW"/>
                 <outlet property="ratingView" destination="9Sx-42-c1F" id="o3e-bw-g7n"/>
+                <outlet property="ratingViewWidthConstraint" destination="H1J-e6-qar" id="ZOu-Cl-ASe"/>
                 <outlet property="venueImageView" destination="Ih7-KS-xXM" id="DQH-ht-7Fn"/>
             </connections>
         </placeholder>

@@ -18,6 +18,7 @@
 @property (nonatomic, strong) IBOutlet UIView *ratingView;
 @property (nonatomic, strong) IBOutlet UILabel *ratingLabel;
 @property (nonatomic, strong) IBOutlet UIImageView *venueImageView;
+@property (nonatomic, strong) IBOutlet NSLayoutConstraint *ratingViewWidthConstraint;
 
 -(void)setupView;
 
@@ -85,10 +86,20 @@
         self.nameLabel.text = venue.name;
         self.addressLabel.text = venue.address;
         self.categoryNameLabel.text = venue.categoryName;
-        self.ratingLabel.text = [venue ratingString];
+        
+        // If we have a valid rating, show the rating view
+        if (venue.rating)
+        {
+            self.ratingViewWidthConstraint.constant = 52.0f;
+            self.ratingLabel.text = [venue ratingString];
+        }
+        else
+        {
+            self.ratingViewWidthConstraint.constant = 0.0f;
+        }
         
         // Hide old image and download the new one
-        self.venueImageView.image = venue.iconImage;
+        self.venueImageView.image = [venue.iconImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         self.venueImageView.alpha = 0.0f;
         
         NSURLSessionDownloadTask *imageDownloadTask = [[NSURLSession sharedSession] downloadTaskWithURL:[NSURL URLWithString:venue.imagePath] completionHandler:^(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error) {
@@ -97,6 +108,15 @@
             {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     self.venueImageView.image = [UIImage imageWithData: [NSData dataWithContentsOfURL:location]];
+                    [UIView animateWithDuration:0.2f animations:^{
+                        self.venueImageView.alpha = 1.0f;
+                    }];
+                });
+            }
+            else
+            {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    self.venueImageView.tintColor = [UIColor cas_redRobinColor];
                     [UIView animateWithDuration:0.2f animations:^{
                         self.venueImageView.alpha = 1.0f;
                     }];
