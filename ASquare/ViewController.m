@@ -23,6 +23,8 @@
 @property (nonatomic, strong) LocationHelper *locationHelper;
 @property (nonatomic, strong) FoursquareService *foursquareService;
 @property (nonatomic, strong) UIImage *venueMarkerImage;
+@property (nonatomic, strong) UIImage *venueMarkerSelectedImage;
+@property (nonatomic, strong) GMSMarker *selectedMarker;
 
 -(void)closeButtonTapped:(id)sender;
 -(void)homeButtonTapped:(id)sender;
@@ -48,6 +50,7 @@
     if (self)
     {
         _venueMarkerImage = [UIImage imageNamed:@"ico-venue"];
+        _venueMarkerSelectedImage = [UIImage imageNamed:@"ico-venue-selected"];
         _foursquareService = [FoursquareService new];
     }
 
@@ -253,6 +256,9 @@
 
 -(void)mapView:(GMSMapView *)mapView idleAtCameraPosition:(GMSCameraPosition *)position
 {
+    [mapView clear];
+    self.myLocationMarker.map = self.map;
+    
     [self.foursquareService venuesForLocationWithLatitude:position.target.latitude longitude:position.target.longitude completion:^(NSArray *venues, NSError *error) {
         if (error)
         {
@@ -266,11 +272,12 @@
                 if (venue)
                 {
                     NSURLSessionDownloadTask *imageDownloadTask = [[NSURLSession sharedSession] downloadTaskWithURL:[NSURL URLWithString:venue.categoryImagePath] completionHandler:^(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-                        UIImage *icon = [UIImage imageWithData: [NSData dataWithContentsOfURL:location]];
+                        venue.iconImage = [UIImage imageWithData: [NSData dataWithContentsOfURL:location]];
                         
                         dispatch_async(dispatch_get_main_queue(), ^{
                             GMSMarker *marker = [GMSMarker markerWithPosition:CLLocationCoordinate2DMake([venue.latitude doubleValue], [venue.longitude doubleValue])];
-                            marker.icon = [self.venueMarkerImage cas_imageWithOverlay:icon atPosition:CGPointMake(-1, -1)]; // The icon is 32p but the marker 30p so offset 1p
+                            marker.userData = venue;
+                            marker.icon = [self.venueMarkerImage cas_imageWithOverlay:venue.iconImage atPosition:CGPointMake(-1, -1)]; // The icon is 32p but the marker 30p so offset 1p
                             marker.map = self.map;
                         });
                         
@@ -286,7 +293,28 @@
 
 -(BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    // Restore the icon for the previously selected marker
+    if (self.selectedMarker)
+    {
+        Venue *previouslySelectedVenue = (Venue *)self.selectedMarker.userData;
+        self.selectedMarker.icon = [self.venueMarkerImage cas_imageWithOverlay:previouslySelectedVenue.iconImage atPosition:CGPointMake(-1, -1)];
+    }
+    
+    self.selectedMarker = marker;
+    
+    Venue *selectedVenue = (Venue *)marker.userData;
+    
+    marker.icon = [self.venueMarkerSelectedImage cas_imageWithOverlay:selectedVenue.iconImage atPosition:CGPointMake(-1, -1)];
+    
+    NSString *venueId = [selectedVenue venueId];
+    [self.foursquareService venueForId:venueId completion:^(Venue *venue, NSError *error) {
+        // The selected venue is missing information about the rating & best image so add it
+        selectedVenue.imagePath = venue.imagePath;
+        selectedVenue.rating = venue.rating;
+        
+        NSLog(@"%@", selectedVenue);
+    }];
+
     return YES;
 }
 
