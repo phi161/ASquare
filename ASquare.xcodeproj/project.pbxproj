@@ -11,6 +11,8 @@
 		CFCFD6531BC3FD7E0086EA9F /* Venue.m in Sources */ = {isa = PBXBuildFile; fileRef = CFCFD6521BC3FD7E0086EA9F /* Venue.m */; settings = {ASSET_TAGS = (); }; };
 		CFCFD6561BC48D960086EA9F /* FoursquareService.m in Sources */ = {isa = PBXBuildFile; fileRef = CFCFD6551BC48D960086EA9F /* FoursquareService.m */; settings = {ASSET_TAGS = (); }; };
 		CFCFD6591BC49C750086EA9F /* UIImage+CASExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = CFCFD6581BC49C750086EA9F /* UIImage+CASExtensions.m */; settings = {ASSET_TAGS = (); }; };
+		CFCFD65C1BC534B80086EA9F /* VenueDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = CFCFD65B1BC534B80086EA9F /* VenueDetailView.m */; settings = {ASSET_TAGS = (); }; };
+		CFCFD65E1BC537820086EA9F /* VenueDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFCFD65D1BC537820086EA9F /* VenueDetailView.xib */; settings = {ASSET_TAGS = (); }; };
 		CFE3647E1BBC4343004B782B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE3647D1BBC4343004B782B /* main.m */; };
 		CFE364811BBC4343004B782B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE364801BBC4343004B782B /* AppDelegate.m */; };
 		CFE364841BBC4343004B782B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE364831BBC4343004B782B /* ViewController.m */; };
@@ -33,6 +35,9 @@
 		CFCFD6551BC48D960086EA9F /* FoursquareService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoursquareService.m; sourceTree = "<group>"; };
 		CFCFD6571BC49C750086EA9F /* UIImage+CASExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+CASExtensions.h"; sourceTree = "<group>"; };
 		CFCFD6581BC49C750086EA9F /* UIImage+CASExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CASExtensions.m"; sourceTree = "<group>"; };
+		CFCFD65A1BC534B80086EA9F /* VenueDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VenueDetailView.h; sourceTree = "<group>"; };
+		CFCFD65B1BC534B80086EA9F /* VenueDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VenueDetailView.m; sourceTree = "<group>"; };
+		CFCFD65D1BC537820086EA9F /* VenueDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VenueDetailView.xib; sourceTree = "<group>"; };
 		CFE364791BBC4343004B782B /* ASquare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ASquare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFE3647D1BBC4343004B782B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CFE3647F1BBC4343004B782B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -90,6 +95,9 @@
 				CFCFD6581BC49C750086EA9F /* UIImage+CASExtensions.m */,
 				CFCFD6511BC3FD7E0086EA9F /* Venue.h */,
 				CFCFD6521BC3FD7E0086EA9F /* Venue.m */,
+				CFCFD65A1BC534B80086EA9F /* VenueDetailView.h */,
+				CFCFD65B1BC534B80086EA9F /* VenueDetailView.m */,
+				CFCFD65D1BC537820086EA9F /* VenueDetailView.xib */,
 				CFE364821BBC4343004B782B /* ViewController.h */,
 				CFE364831BBC4343004B782B /* ViewController.m */,
 			);
@@ -126,12 +134,12 @@
 		CFE3647C1BBC4343004B782B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				CFE364961BBD5DF0004B782B /* APIKeys.plist */,
-				CFE364881BBC4343004B782B /* Assets.xcassets */,
-				CFE3648D1BBC4343004B782B /* Info.plist */,
-				CFE3648A1BBC4343004B782B /* LaunchScreen.storyboard */,
-				CFB7F6731BBEB9380016DC83 /* Localizable.strings */,
 				CFE3647D1BBC4343004B782B /* main.m */,
+				CFE364961BBD5DF0004B782B /* APIKeys.plist */,
+				CFE3648D1BBC4343004B782B /* Info.plist */,
+				CFB7F6731BBEB9380016DC83 /* Localizable.strings */,
+				CFE364881BBC4343004B782B /* Assets.xcassets */,
+				CFE3648A1BBC4343004B782B /* LaunchScreen.storyboard */,
 				CFE364851BBC4343004B782B /* Main.storyboard */,
 			);
 			name = "Supporting Files";
@@ -197,6 +205,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CFB7F6741BBEB9380016DC83 /* Localizable.strings in Resources */,
+				CFCFD65E1BC537820086EA9F /* VenueDetailView.xib in Resources */,
 				CFE3648C1BBC4343004B782B /* LaunchScreen.storyboard in Resources */,
 				CFE364971BBD5DF0004B782B /* APIKeys.plist in Resources */,
 				CFE364891BBC4343004B782B /* Assets.xcassets in Resources */,
@@ -249,6 +258,7 @@
 				CFCFD6561BC48D960086EA9F /* FoursquareService.m in Sources */,
 				CFCFD6591BC49C750086EA9F /* UIImage+CASExtensions.m in Sources */,
 				CFE364811BBC4343004B782B /* AppDelegate.m in Sources */,
+				CFCFD65C1BC534B80086EA9F /* VenueDetailView.m in Sources */,
 				CFCFD6531BC3FD7E0086EA9F /* Venue.m in Sources */,
 				CFE3647E1BBC4343004B782B /* main.m in Sources */,
 			);
