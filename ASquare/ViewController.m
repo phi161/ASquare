@@ -336,6 +336,12 @@
 
 -(BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker
 {
+    // Ignore if "my location" is tapped
+    if (marker == self.myLocationMarker)
+    {
+        return NO;
+    }
+    
     // Restore the icon for the previously selected marker
     if (self.selectedMarker)
     {
@@ -366,8 +372,6 @@
             }];
         });
     }];
-
-    
 
     return YES;
 }
