@@ -12,6 +12,7 @@
 #import "Venue.h"
 #import "FoursquareService.h"
 #import "UIImage+CASExtensions.h"
+#import "VenueDetailView.h"
 
 @interface ViewController () <GMSMapViewDelegate>
 
@@ -19,14 +20,20 @@
 @property (nonatomic, strong) IBOutlet UILabel *statusLabel;
 @property (nonatomic, strong) IBOutlet UILabel *addressLabel;
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *bottomConstraint;
+@property (nonatomic, strong) IBOutlet UIView *venueDetailContainer;
+@property (nonatomic, strong) VenueDetailView *venueDetailView;
+
 @property (nonatomic, strong) GMSMarker *myLocationMarker;
 @property (nonatomic, strong) LocationHelper *locationHelper;
 @property (nonatomic, strong) FoursquareService *foursquareService;
 @property (nonatomic, strong) UIImage *venueMarkerImage;
+@property (nonatomic, strong) UIImage *venueMarkerSelectedImage;
+@property (nonatomic, strong) GMSMarker *selectedMarker;
 
 -(void)closeButtonTapped:(id)sender;
 -(void)homeButtonTapped:(id)sender;
 -(void)reset;
+-(void)setupDetailView;
 
 @end
 
@@ -48,6 +55,7 @@
     if (self)
     {
         _venueMarkerImage = [UIImage imageNamed:@"ico-venue"];
+        _venueMarkerSelectedImage = [UIImage imageNamed:@"ico-venue-selected"];
         _foursquareService = [FoursquareService new];
     }
 
@@ -66,6 +74,8 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+
+    self.venueDetailContainer.layer.cornerRadius = 5.0f;
 
     self.statusLabel.text = @"";
 
@@ -88,6 +98,23 @@
 
     // Start looking for the location and address
     [self requestLocation];
+
+    [self setupDetailView];
+}
+
+
+-(void)setupDetailView
+{
+    self.venueDetailView = [[VenueDetailView alloc] initWithFrame:CGRectZero];
+    [self.venueDetailContainer addSubview:self.venueDetailView];
+    
+    CGFloat inset = 6.0f;
+    [self.venueDetailContainer addConstraint:[NSLayoutConstraint constraintWithItem:self.venueDetailView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.venueDetailContainer attribute:NSLayoutAttributeTop multiplier:1.0f constant:inset]];
+    [self.venueDetailContainer addConstraint:[NSLayoutConstraint constraintWithItem:self.venueDetailView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.venueDetailContainer attribute:NSLayoutAttributeLeading multiplier:1.0f constant:inset]];
+    [self.venueDetailContainer addConstraint:[NSLayoutConstraint constraintWithItem:self.venueDetailView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.venueDetailContainer attribute:NSLayoutAttributeTrailing multiplier:1.0f constant:-inset]];
+    [self.venueDetailContainer addConstraint:[NSLayoutConstraint constraintWithItem:self.venueDetailView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.venueDetailContainer attribute:NSLayoutAttributeBottom multiplier:1.0f constant:-inset]];
+    
+    self.venueDetailContainer.alpha = 0.0f;
 }
 
 
@@ -144,7 +171,19 @@
 
 -(void)closeButtonTapped:(id)sender
 {
-    //
+    // Hide the detail view
+    [UIView animateWithDuration:0.2f animations:^{
+        self.venueDetailContainer.alpha = 0.0f;
+    }];
+    
+    // Reset the selected marker
+    if (self.selectedMarker)
+    {
+        Venue *previouslySelectedVenue = (Venue *)self.selectedMarker.userData;
+        self.selectedMarker.icon = [self.venueMarkerImage cas_imageWithOverlay:previouslySelectedVenue.iconImage atPosition:CGPointMake(-1, -1)];
+    }
+    
+    self.selectedMarker = nil;
 }
 
 
@@ -229,6 +268,8 @@
 
 -(void)reset
 {
+    self.venueDetailContainer.alpha = 0.0f;
+
     self.statusLabel.text = @"";
 
     self.myLocationMarker = nil;
@@ -253,6 +294,16 @@
 
 -(void)mapView:(GMSMapView *)mapView idleAtCameraPosition:(GMSCameraPosition *)position
 {
+    // Clear map but keep showing "my location"
+    [mapView clear];
+    self.myLocationMarker.map = self.map;
+    
+    // Hide the detail view
+    [UIView animateWithDuration:0.2f animations:^{
+        self.venueDetailContainer.alpha = 0.0f;
+    }];
+
+    
     [self.foursquareService venuesForLocationWithLatitude:position.target.latitude longitude:position.target.longitude completion:^(NSArray *venues, NSError *error) {
         if (error)
         {
@@ -266,11 +317,12 @@
                 if (venue)
                 {
                     NSURLSessionDownloadTask *imageDownloadTask = [[NSURLSession sharedSession] downloadTaskWithURL:[NSURL URLWithString:venue.categoryImagePath] completionHandler:^(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-                        UIImage *icon = [UIImage imageWithData: [NSData dataWithContentsOfURL:location]];
+                        venue.iconImage = [UIImage imageWithData: [NSData dataWithContentsOfURL:location]];
                         
                         dispatch_async(dispatch_get_main_queue(), ^{
                             GMSMarker *marker = [GMSMarker markerWithPosition:CLLocationCoordinate2DMake([venue.latitude doubleValue], [venue.longitude doubleValue])];
-                            marker.icon = [self.venueMarkerImage cas_imageWithOverlay:icon atPosition:CGPointMake(-1, -1)]; // The icon is 32p but the marker 30p so offset 1p
+                            marker.userData = venue;
+                            marker.icon = [self.venueMarkerImage cas_imageWithOverlay:venue.iconImage atPosition:CGPointMake(-1, -1)]; // The icon is 32p but the marker 30p so offset 1p
                             marker.map = self.map;
                         });
                         
@@ -286,7 +338,43 @@
 
 -(BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    // Ignore if "my location" is tapped
+    if (marker == self.myLocationMarker)
+    {
+        return NO;
+    }
+    
+    // Restore the icon for the previously selected marker
+    if (self.selectedMarker)
+    {
+        Venue *previouslySelectedVenue = (Venue *)self.selectedMarker.userData;
+        self.selectedMarker.icon = [self.venueMarkerImage cas_imageWithOverlay:previouslySelectedVenue.iconImage atPosition:CGPointMake(-1, -1)];
+    }
+    
+    self.selectedMarker = marker;
+    
+    Venue *selectedVenue = (Venue *)marker.userData;
+    
+    marker.icon = [self.venueMarkerSelectedImage cas_imageWithOverlay:selectedVenue.iconImage atPosition:CGPointMake(-1, -1)];
+    
+    NSString *venueId = [selectedVenue venueId];
+    [self.foursquareService venueForId:venueId completion:^(Venue *venue, NSError *error) {
+        // The selected venue is missing information about the rating & best image so add it
+        selectedVenue.imagePath = venue.imagePath;
+        selectedVenue.rating = venue.rating;
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [UIView animateWithDuration:0.2f animations:^{
+                self.venueDetailContainer.alpha = 0.0f;
+            } completion:^(BOOL finished) {
+                self.venueDetailView.venue = selectedVenue;
+                [UIView animateWithDuration:0.2f animations:^{
+                    self.venueDetailContainer.alpha = 1.0f;
+                }];
+            }];
+        });
+    }];
+
     return YES;
 }
 

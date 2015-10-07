@@ -22,6 +22,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0es-x6-U84">
+                                <rect key="frame" x="14" y="78" width="572" height="108"/>
+                                <color key="backgroundColor" red="0.87450980389999999" green="0.85882352939999995" blue="0.83137254900000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="108" id="zg0-CN-8Bw"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M9m-Bg-lXv" userLabel="Address Container">
                                 <rect key="frame" x="0.0" y="562" width="600" height="101"/>
                                 <subviews>
@@ -90,8 +97,11 @@ label</string>
                         <constraints>
                             <constraint firstItem="jgh-FG-S6M" firstAttribute="top" secondItem="8qH-f8-aXt" secondAttribute="topMargin" id="0rb-MA-Onl"/>
                             <constraint firstItem="jgh-FG-S6M" firstAttribute="leading" secondItem="8qH-f8-aXt" secondAttribute="leading" id="6Ma-4l-0Ne"/>
+                            <constraint firstItem="0es-x6-U84" firstAttribute="leading" secondItem="8qH-f8-aXt" secondAttribute="leading" constant="14" id="76w-GC-osb"/>
+                            <constraint firstItem="0es-x6-U84" firstAttribute="top" secondItem="8qH-f8-aXt" secondAttribute="topMargin" constant="78" id="MF7-RA-NtN"/>
                             <constraint firstAttribute="bottom" secondItem="M9m-Bg-lXv" secondAttribute="bottom" constant="-63" id="NCu-QZ-Z2R"/>
                             <constraint firstAttribute="trailing" secondItem="M9m-Bg-lXv" secondAttribute="trailing" id="RT6-Vm-277"/>
+                            <constraint firstAttribute="trailing" secondItem="0es-x6-U84" secondAttribute="trailing" constant="14" id="XmK-Op-law"/>
                             <constraint firstAttribute="trailing" secondItem="jgh-FG-S6M" secondAttribute="trailing" id="a4V-fK-XM2"/>
                             <constraint firstItem="M9m-Bg-lXv" firstAttribute="leading" secondItem="8qH-f8-aXt" secondAttribute="leading" id="i9p-q6-ppR"/>
                             <constraint firstAttribute="bottomMargin" secondItem="jgh-FG-S6M" secondAttribute="bottom" id="pD1-k6-Bwp"/>
@@ -103,6 +113,7 @@ label</string>
                         <outlet property="bottomConstraint" destination="NCu-QZ-Z2R" id="ORN-pv-6ym"/>
                         <outlet property="map" destination="jgh-FG-S6M" id="5Xo-dU-OBG"/>
                         <outlet property="statusLabel" destination="kG6-Ur-Yil" id="OPT-RO-nAg"/>
+                        <outlet property="venueDetailContainer" destination="0es-x6-U84" id="kaN-En-j12"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rNM-v6-vaN" userLabel="First Responder" sceneMemberID="firstResponder"/>

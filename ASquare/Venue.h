@@ -6,7 +6,8 @@
 //  Copyright © 2015 Carmine Studios. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import UIKit;
+@import Foundation;
 
 @interface Venue : NSObject
 
@@ -19,7 +20,10 @@
 @property (nonatomic, copy) NSString *imagePath;
 @property (nonatomic, copy) NSString *categoryImagePath;
 @property (nonatomic, copy) NSString *categoryName;
+@property (nonatomic, strong) UIImage *iconImage;
 
 -(id)initWithDictionary:(NSDictionary *)dictionary;
+
+-(NSString *)ratingString;
 
 @end
