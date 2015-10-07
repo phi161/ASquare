@@ -3,6 +3,10 @@
 <plist version="1.0">
 <dict>
 	<key>GoogleAPIKey</key>
-	<string>Google API Key</string>
+	<string>Enter the Google API key here</string>
+	<key>FoursquareClientId</key>
+	<string>Enter the Foursquare Client id here</string>
+	<key>FoursquareClientSecret</key>
+	<string>Enter the Foursquare Client secret here</string>
 </dict>
 </plist>

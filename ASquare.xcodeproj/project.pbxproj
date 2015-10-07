@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		CFB7F6741BBEB9380016DC83 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CFB7F6731BBEB9380016DC83 /* Localizable.strings */; settings = {ASSET_TAGS = (); }; };
+		CFCFD6531BC3FD7E0086EA9F /* Venue.m in Sources */ = {isa = PBXBuildFile; fileRef = CFCFD6521BC3FD7E0086EA9F /* Venue.m */; settings = {ASSET_TAGS = (); }; };
+		CFCFD6561BC48D960086EA9F /* FoursquareService.m in Sources */ = {isa = PBXBuildFile; fileRef = CFCFD6551BC48D960086EA9F /* FoursquareService.m */; settings = {ASSET_TAGS = (); }; };
+		CFCFD6591BC49C750086EA9F /* UIImage+CASExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = CFCFD6581BC49C750086EA9F /* UIImage+CASExtensions.m */; settings = {ASSET_TAGS = (); }; };
 		CFE3647E1BBC4343004B782B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE3647D1BBC4343004B782B /* main.m */; };
 		CFE364811BBC4343004B782B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE364801BBC4343004B782B /* AppDelegate.m */; };
 		CFE364841BBC4343004B782B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE364831BBC4343004B782B /* ViewController.m */; };
@@ -24,6 +27,12 @@
 		2D9184F4169B12E04B91F98B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		31DCB645DA2E3F4075BEC3CA /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		CFB7F6731BBEB9380016DC83 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		CFCFD6511BC3FD7E0086EA9F /* Venue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Venue.h; sourceTree = "<group>"; };
+		CFCFD6521BC3FD7E0086EA9F /* Venue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Venue.m; sourceTree = "<group>"; };
+		CFCFD6541BC48D960086EA9F /* FoursquareService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoursquareService.h; sourceTree = "<group>"; };
+		CFCFD6551BC48D960086EA9F /* FoursquareService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoursquareService.m; sourceTree = "<group>"; };
+		CFCFD6571BC49C750086EA9F /* UIImage+CASExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+CASExtensions.h"; sourceTree = "<group>"; };
+		CFCFD6581BC49C750086EA9F /* UIImage+CASExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CASExtensions.m"; sourceTree = "<group>"; };
 		CFE364791BBC4343004B782B /* ASquare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ASquare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFE3647D1BBC4343004B782B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CFE3647F1BBC4343004B782B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -73,8 +82,14 @@
 			children = (
 				CFE3647F1BBC4343004B782B /* AppDelegate.h */,
 				CFE364801BBC4343004B782B /* AppDelegate.m */,
+				CFCFD6541BC48D960086EA9F /* FoursquareService.h */,
+				CFCFD6551BC48D960086EA9F /* FoursquareService.m */,
 				CFE364931BBC7842004B782B /* LocationHelper.h */,
 				CFE364941BBC7842004B782B /* LocationHelper.m */,
+				CFCFD6571BC49C750086EA9F /* UIImage+CASExtensions.h */,
+				CFCFD6581BC49C750086EA9F /* UIImage+CASExtensions.m */,
+				CFCFD6511BC3FD7E0086EA9F /* Venue.h */,
+				CFCFD6521BC3FD7E0086EA9F /* Venue.m */,
 				CFE364821BBC4343004B782B /* ViewController.h */,
 				CFE364831BBC4343004B782B /* ViewController.m */,
 			);
@@ -231,7 +246,10 @@
 			files = (
 				CFE364951BBC7842004B782B /* LocationHelper.m in Sources */,
 				CFE364841BBC4343004B782B /* ViewController.m in Sources */,
+				CFCFD6561BC48D960086EA9F /* FoursquareService.m in Sources */,
+				CFCFD6591BC49C750086EA9F /* UIImage+CASExtensions.m in Sources */,
 				CFE364811BBC4343004B782B /* AppDelegate.m in Sources */,
+				CFCFD6531BC3FD7E0086EA9F /* Venue.m in Sources */,
 				CFE3647E1BBC4343004B782B /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,8 +9,11 @@
 @import GoogleMaps;
 #import "ViewController.h"
 #import "LocationHelper.h"
+#import "Venue.h"
+#import "FoursquareService.h"
+#import "UIImage+CASExtensions.h"
 
-@interface ViewController ()
+@interface ViewController () <GMSMapViewDelegate>
 
 @property (nonatomic, strong) IBOutlet GMSMapView *map;
 @property (nonatomic, strong) IBOutlet UILabel *statusLabel;
@@ -18,6 +21,8 @@
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *bottomConstraint;
 @property (nonatomic, strong) GMSMarker *myLocationMarker;
 @property (nonatomic, strong) LocationHelper *locationHelper;
+@property (nonatomic, strong) FoursquareService *foursquareService;
+@property (nonatomic, strong) UIImage *venueMarkerImage;
 
 -(void)closeButtonTapped:(id)sender;
 -(void)homeButtonTapped:(id)sender;
@@ -42,10 +47,19 @@
 
     if (self)
     {
-        //
+        _venueMarkerImage = [UIImage imageNamed:@"ico-venue"];
+        _foursquareService = [FoursquareService new];
     }
 
     return self;
+}
+
+
+-(void)loadView
+{
+    [super loadView];
+    
+    _map.delegate = self;
 }
 
 
@@ -161,6 +175,8 @@
                 self.myLocationMarker = [GMSMarker markerWithPosition:myLocation.coordinate];
                 [self.myLocationMarker setIcon:[UIImage imageNamed:@"ico-mylocation-pin"]];
                 self.myLocationMarker.map = self.map;
+                
+                [self requestAddress];
             }
 
             if (finished)
@@ -230,6 +246,48 @@
     }];
 
     self.locationHelper = nil;
+}
+
+
+#pragma mark - GMSMapViewDelegate
+
+-(void)mapView:(GMSMapView *)mapView idleAtCameraPosition:(GMSCameraPosition *)position
+{
+    [self.foursquareService venuesForLocationWithLatitude:position.target.latitude longitude:position.target.longitude completion:^(NSArray *venues, NSError *error) {
+        if (error)
+        {
+            //TODO: Handle error
+            NSLog(@"%@", error);
+        }
+        else // Enumerate all venues and fetch the category image, used as a marker's icon
+        {
+            [venues enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                Venue *venue = (Venue *)obj;
+                if (venue)
+                {
+                    NSURLSessionDownloadTask *imageDownloadTask = [[NSURLSession sharedSession] downloadTaskWithURL:[NSURL URLWithString:venue.categoryImagePath] completionHandler:^(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                        UIImage *icon = [UIImage imageWithData: [NSData dataWithContentsOfURL:location]];
+                        
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            GMSMarker *marker = [GMSMarker markerWithPosition:CLLocationCoordinate2DMake([venue.latitude doubleValue], [venue.longitude doubleValue])];
+                            marker.icon = [self.venueMarkerImage cas_imageWithOverlay:icon atPosition:CGPointMake(-1, -1)]; // The icon is 32p but the marker 30p so offset 1p
+                            marker.map = self.map;
+                        });
+                        
+                    }];
+                    
+                    [imageDownloadTask resume];
+                }
+            }];
+        }
+    }];
+}
+
+
+-(BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    return YES;
 }
 
 
